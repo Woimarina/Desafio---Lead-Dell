@@ -4,7 +4,7 @@ import os
 
 def on_connect(client, userdata, flags, rc):
     print("Conectado. resulta: {}".format(str(rc)))
-    client.subscribe("marina")
+    client.subscribe(topic)
 
 def on_message(client, userdata, msg):
     print("Mensagem recebida " + msg.topic + ": " + str(msg.payload))
@@ -16,13 +16,15 @@ def on_message(client, userdata, msg):
     else:
         print('comando recebido: {}'.format(lido['comando']))
 
-login = input("usuário: ")
-pword = input("senha: ")
+log = input(str("usuario: "))
+pword = input(str("senha: "))
+host = input(str("host: "))
+topic = input(str("topico: "))
 
 clientB = mqtt.Client("ClientB")
 clientB.enable_logger()
-clientB.username_pw_set(login, pword)
+clientB.username_pw_set(log, pword)
 clientB.on_connect = on_connect
 clientB.on_message = on_message
-clientB.connect("192.168.0.7", 1883, 60)
+clientB.connect(host, 1883, 60)
 clientB.loop_forever()
