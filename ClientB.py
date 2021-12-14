@@ -16,11 +16,12 @@ def on_message(client, userdata, msg):
     else:
         print('comando recebido: {}'.format(lido['comando']))
 
-
+login = input("usuário: ")
+pword = input("senha: ")
 
 clientB = mqtt.Client("ClientB")
 clientB.enable_logger()
-clientB.username_pw_set("admin", "mq@IoT2019")
+clientB.username_pw_set(login, pword)
 clientB.on_connect = on_connect
 clientB.on_message = on_message
 clientB.connect("192.168.0.7", 1883, 60)
